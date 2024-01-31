@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회의록 입력 폼</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="meetingForm">
+        <h2>회의록 입력</h2>
+        <div class="form-group">
+            <label for="meetingDate">회의일자</label>
+            <input type="date" id="meetingDate" name="meetingDate" required>
+        </div>
+        <div class="form-group">
+            <label for="startTime">회의 시작 시간</label>
+            <input type="time" id="startTime" name="startTime" required>
+            <label for="endTime">회의 종료 시간</label>
+            <input type="time" id="endTime" name="endTime" required>
+        </div>
+        <div class="form-group">
+            <label for="meetingPlace">회의장소</label>
+            <input type="text" id="meetingPlace" name="meetingPlace" required>
+        </div>
+        <div class="form-group">
+            <label for="meetingTitle">회의제목</label>
+            <input type="text" id="meetingTitle" name="meetingTitle" required>
+        </div>
+        <div class="form-group">
+            <label for="meetingContent">회의내용</label>
+            <textarea id="meetingContent" name="meetingContent" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="participants">참석자 정보 (직번, 성명, 소속, 비고)</label>
+            <textarea id="participants" name="participants" rows="4" required></textarea>
+        </div>
+        <button type="button" id="submitButton">회의록 제출</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
