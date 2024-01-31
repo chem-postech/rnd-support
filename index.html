@@ -10,34 +10,65 @@
     <form id="meetingForm">
         <h2>회의록 입력</h2>
         <div class="form-group">
-            <label for="meetingDate">회의일자</label>
+            <label for="meetingDate">1. 회의일자</label>
             <input type="date" id="meetingDate" name="meetingDate" required>
         </div>
         <div class="form-group">
-            <label for="startTime">회의 시작 시간</label>
+            <label for="startTime">2. 회의시작시간</label>
             <input type="time" id="startTime" name="startTime" required>
-            <label for="endTime">회의 종료 시간</label>
+            <label for="endTime">3. 회의종료시간</label>
             <input type="time" id="endTime" name="endTime" required>
         </div>
         <div class="form-group">
-            <label for="meetingPlace">회의장소</label>
+            <label for="meetingPlace">4.회의장소</label>
             <input type="text" id="meetingPlace" name="meetingPlace" required>
         </div>
         <div class="form-group">
-            <label for="meetingTitle">회의제목</label>
+            <label for="meetingTitle">5.회의제목</label>
             <input type="text" id="meetingTitle" name="meetingTitle" required>
         </div>
         <div class="form-group">
-            <label for="meetingContent">회의내용</label>
+            <label for="meetingContent">6.회의내용</label>
             <textarea id="meetingContent" name="meetingContent" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <label for="participants">참석자 정보 (직번, 성명, 소속, 비고)</label>
-            <textarea id="participants" name="participants" rows="4" required></textarea>
+            <label for="participants">7.참석자정보</label>
+            <div id="participants-container"></div>
+            <button type="button" onclick="addParticipant()">참석자 추가하기</button>
         </div>
         <button type="button" id="submitButton">회의록 제출</button>
     </form>
 
-    <script src="script.js"></script>
+    <script>
+        function addParticipant() {
+            var newParticipant = document.createElement("div");
+            newParticipant.innerHTML = `
+                <input type="text" placeholder="직번" required>
+                <input type="text" placeholder="성명" required>
+                <input type="text" placeholder="소속" required>
+                <input type="text" placeholder="비고">
+            `;
+            document.getElementById("participants-container").appendChild(newParticipant);
+        }
+
+        document.getElementById('submitButton').addEventListener('click', function(e) {
+            e.preventDefault(); // 기본 제출 이벤트 방지
+            submitToGoogleAppsScript(); // Google Apps Script 호출 함수 실행
+        });
+
+        function submitToGoogleAppsScript() {
+            var formData = new FormData(document.getElementById('meetingForm'));
+            fetch('https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbzfAPwyEyzWXWHMxjRJBIZwIdGXQcLVDhbYNlEqgkUX73zgPFVuBQuuWwVMF_v_IK30/exec/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('회의록이 성공적으로 제출되었습니다.');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
 </html>
