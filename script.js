@@ -14,7 +14,7 @@ document.getElementById('submitButton').addEventListener('click', function() {
 });
 
 function sendDataToGoogleSheet(formData) {
-    fetch('YOUR_WEB_APP_URL', {
+    fetch('https://script.google.com/macros/s/AKfycbzfAPwyEyzWXWHMxjRJBIZwIdGXQcLVDhbYNlEqgkUX73zgPFVuBQuuWwVMF_v_IK30/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
